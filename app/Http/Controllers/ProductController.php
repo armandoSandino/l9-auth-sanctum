@@ -35,6 +35,15 @@ class ProductController extends CustomController
         'Product Created Successfully.');
     }
 
+    public function show( $id ){
+        $product = Product::findOrFail( $id );
+        if ( is_null( $product )  ) {
+            return $this->sendError('Product not found');
+        }
+
+        return $this->sendResponse( new ProductResource($product),
+        'Product retrieved successfully');
+    }
 
     public function update(Request $request, Product $product ){
         $input = $request->all();
@@ -53,4 +62,5 @@ class ProductController extends CustomController
 
         return $this->sendResponse( new ProductResource($product), 'Product Udated successfully.');
     }
+    
 }
