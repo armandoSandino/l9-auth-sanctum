@@ -62,5 +62,9 @@ class ProductController extends CustomController
 
         return $this->sendResponse( new ProductResource($product), 'Product Udated successfully.');
     }
-    
+
+    public function destroy( Product $product ) {
+        $product->delete();
+        return $this->sendResponse([],'Product deleted successfully.');
+    }
 }
