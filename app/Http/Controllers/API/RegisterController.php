@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
-use App\Model\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
@@ -39,9 +39,8 @@ class RegisterController extends \App\Http\Controllers\API\BaseController
             'email'=> $request->email,
             'password'=> $request->password
         ])) {
-            $user = Auth::user();
-            $success['token'] = $user->createToken('MyAppSlow')
-            ->plantTextToken;
+            $user = Auth::user(); 
+            $success['token'] = $user->createToken('MySlowApp')->plainTextToken;
             $success['name']= $user->name;
 
             return $this->sendResponse($success, 'User Login Successfully.');
